@@ -1,0 +1,29 @@
+https:#!usr/bin/env
+import wiringpi2
+import pexpect
+import time
+
+io=wiringpi2.GPIO(wiringpi2.GPIO.WPI_MODE_PINS)
+
+io.pinMode(7,io.OUTPUT)
+
+while 1 :
+  contacto = "Luis"
+  f = open('/sys/class/thermal/thermal_zone0/temp','r')
+  for linea in f:
+    temp = linea
+  f.close()
+  tmp=float(temp)/1000.0
+  mensaje = temp
+  telegram = pexpect.spawn('./telegram tg.pub')
+  telegram.expect('0m')
+  telegram.sendline('msg '+contacto+' '+mensaje)#Ejecuta el comando msg
+  #print ('Mensaje enviado a '+ contacto) #Notifica que ya se ha
+mandado el mensaje
+  print float(temp)/1000.0
+  if tem > 35:
+    io.digitalWrite(7,io.HIGH)
+  else:
+    io.digitalWrite(7,io.LOW)
+  telegram.sendline('quit')#cierra Telegram
+  time.sleep(10)//github.com/pionner123/temperatura-rpi.git
