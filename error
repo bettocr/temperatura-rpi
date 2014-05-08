@@ -1,0 +1,41 @@
+Traceback (most recent call last):
+  File "telegram.py", line 19, in <module>
+    telegram.expect('0m')
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/__init__.py",
+line 1418, in expect
+    timeout, searchwindowsize)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/__init__.py",
+line 1433, in expect_list
+    timeout, searchwindowsize)
+  File "/usr/local/lib/python2.7/dist-packages/pexpect/__init__.py",
+line 1535, in expect_loop
+    raise TIMEOUT(str(err) + '\n' + str(self))
+pexpect.TIMEOUT: Timeout exceeded.
+<pexpect.spawn object at 0xb6ca3330>
+version: 3.2
+command: ./telegram
+args: ['./telegram', 'tg.pub']
+searcher: <pexpect.searcher_re object at 0xb6ca33d0>
+buffer (last 100 chars): "e it\r\nunder certain conditions; type
+`show_license' for details.\r\nTelephone number (with '+' sign): "
+before (last 100 chars): "e it\r\nunder certain conditions; type
+`show_license' for details.\r\nTelephone number (with '+' sign): "
+after: <class 'pexpect.TIMEOUT'>
+match: None
+match_index: None
+exitstatus: None
+flag_eof: False
+pid: 2400
+child_fd: 4
+closed: False
+timeout: 30
+delimiter: <class 'pexpect.EOF'>
+logfile: None
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
