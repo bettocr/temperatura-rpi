@@ -1,29 +1,39 @@
-https:#!usr/bin/env
+#!/usr/bin/env
 import wiringpi2
 import pexpect
 import time
+
+
+def envTLG(mensaje):
+   contacto = "Betto"                          #Contacto a quien va el mensaje
+   telegram = pexpect.spawn('/home/pi/tg/telegram -k /home/pi/tg/tg-server.pub') #Inicia Telegram
+   telegram.expect("0m")                            #Espera a que termine de iniciar
+   telegram.sendline('msg '+contacto+' '+mensaje)   #Ejecuta el comando msg
+   print ('Mensaje enviado a '+ contacto)           #Notifica que ya se ha mandado el mensaje
+   telegram.sendline('quit')                        #cierra Telegram
+
+
 
 io=wiringpi2.GPIO(wiringpi2.GPIO.WPI_MODE_PINS)
 
 io.pinMode(7,io.OUTPUT)
 
 while 1 :
-  contacto = "Luis"
+
   f = open('/sys/class/thermal/thermal_zone0/temp','r')
   for linea in f:
     temp = linea
   f.close()
   tmp=float(temp)/1000.0
-  mensaje = temp
-  telegram = pexpect.spawn('./telegram tg.pub')
-  telegram.expect('0m')
-  telegram.sendline('msg '+contacto+' '+mensaje)#Ejecuta el comando msg
-  #print ('Mensaje enviado a '+ contacto) #Notifica que ya se ha
-mandado el mensaje
+  mensaje = str(tmp)
+  envTLG(mensaje)
   print float(temp)/1000.0
-  if tem > 35:
+  if temp > 35:
     io.digitalWrite(7,io.HIGH)
   else:
     io.digitalWrite(7,io.LOW)
-  telegram.sendline('quit')#cierra Telegram
-  time.sleep(10)//github.com/pionner123/temperatura-rpi.git
+  time.sleep(10) #github.com/pionner123/temperatura-rpi.git
+
+# antes de ejecutar este archivo tiene que hacer esto en el bash sudo cp -R .telegram/ /root/
+# en la linea 9 tienes que poner la ruta completa donde estan los archivos
+# si quiere puedes darme credito jajajaja.
